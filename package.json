@@ -5,5 +5,21 @@
   "repository": "git@github.com:A1Liu/testing",
   "author": "Albert Liu <albertymliu@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@karimsa/tinyorm": "^0.0.1-0",
+    "express": "4.18.2",
+    "pg": "8.8.0",
+    "zod": "3.20.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.16.8",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.4"
+  }
 }
