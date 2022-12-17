@@ -49,6 +49,8 @@ const start = async () => {
     console.log();
   }
 
+  await pool.withTransaction(conn => conn.initMigrations());
+
   await pool.executeMigration("generated migrations", migrations);
 
 
