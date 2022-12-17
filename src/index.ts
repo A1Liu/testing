@@ -51,9 +51,15 @@ const start = async () => {
 
   // await pool.withTransaction(conn => conn.initMigrations());
   if (migrations.length !== 0) {
-    await pool.executeMigration("generated migrations: " + uuid(), migrations);
+    // await pool.executeMigration("generated migrations: " + uuid(), migrations);
   }
 
+  await pool.withTransaction(async conn => {
+    const entities = [User];
+    for (const entity of entities) {
+      await conn.synchronizeEntity(entity);
+    }
+  });
 
   const port = process.env.PORT || 5000;
   app.listen(port, () => {
