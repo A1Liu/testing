@@ -1,6 +1,7 @@
 import express from "express";
 import {Entity, Column, createSelectBuilder} from "@karimsa/tinyorm";
 import { createConnectionPool } from '@karimsa/tinyorm';
+import {v4 as uuid} from "uuid"
 
 const pool = createConnectionPool({
   user: 'postgres',
@@ -42,16 +43,16 @@ const start = async () => {
   for (const mig of migrations) {
     console.log("suggested migration: (reason: " + mig.reason + ")");
     for (const q of mig.queries) {
-      console.log("   ", q.text, "\n");
+      console.log("   ", q.text);
       console.log("   values:", q.values);
-
     }
     console.log();
   }
 
-  await pool.withTransaction(conn => conn.initMigrations());
-
-  await pool.executeMigration("generated migrations", migrations);
+  // await pool.withTransaction(conn => conn.initMigrations());
+  if (migrations.length !== 0) {
+    await pool.executeMigration("generated migrations: " + uuid(), migrations);
+  }
 
 
   const port = process.env.PORT || 5000;
