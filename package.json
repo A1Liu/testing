@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "pg-start": "docker run --name testing-pg -e POSTGRES_PASSWORD=password -d -p 1313:5432 postgres"
   },
   "dependencies": {
     "@karimsa/tinyorm": "0.0.1-11",
