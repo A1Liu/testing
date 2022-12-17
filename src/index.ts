@@ -49,13 +49,10 @@ const start = async () => {
     console.log();
   }
 
-  // await pool.withTransaction(conn => conn.initMigrations());
-  if (migrations.length !== 0) {
-    // await pool.executeMigration("generated migrations: " + uuid(), migrations);
-  }
-
   await pool.withTransaction(async conn => {
     const entities = [User];
+
+    await conn.initMigrations();
     for (const entity of entities) {
       await conn.synchronizeEntity(entity);
     }
