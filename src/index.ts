@@ -1,5 +1,5 @@
 import express from "express";
-import {Entity, Column, createSelectBuilder} from "@karimsa/tinyorm";
+import {Entity, Column, createSelectBuilder, } from "@karimsa/tinyorm";
 import { createConnectionPool } from '@karimsa/tinyorm';
 import {v4 as uuid} from "uuid"
 
@@ -14,11 +14,35 @@ export class User extends Entity({ schema: "app", tableName: "users" }) {
   readonly id: string;
 
   @Column({ type: "text" })
+  readonly username: string;
+
+  @Column({ type: "text" })
   readonly name: string;
 }
 
 const app = express();
-app.get("/users/:userid", async (req, res) => {
+
+app.post("/users/create/:username", async (req, res) => {
+  const username = req.params.username;
+  await pool.withClient(async client => {
+
+    const user = await createInsert()
+        .from(User)
+        .addWhere(where => where("id").Equals(id))
+        .selectAll()
+        .getOne(client);
+    if (!user) {
+      res.json({});
+      return;
+    }
+
+    res.json({
+      id:
+    });
+  })
+});
+
+app.get("/users/info/:userid", async (req, res) => {
   const id = req.params.userid;
   await pool.withClient(async client => {
     const user = await createSelectBuilder()
@@ -33,7 +57,6 @@ app.get("/users/:userid", async (req, res) => {
 
     res.json(user);
   })
-  res.json();
 });
 
 const start = async () => {
