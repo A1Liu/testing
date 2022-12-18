@@ -1,5 +1,5 @@
 import express from "express";
-import {Entity, Column, createSelectBuilder, createInsertBuilder,} from "@karimsa/tinyorm";
+import {Entity, Column, createSimpleQueryBuilder, createInsertBuilder } from "@karimsa/tinyorm";
 import { createConnectionPool } from '@karimsa/tinyorm';
 import {v4 as uuid} from "uuid"
 
@@ -28,7 +28,7 @@ app.post("/users/create/:username", async (req, res) => {
 
     const [user] = await createInsertBuilder<User>(User)
         .addRows([
-          { username, name: "Hello" }
+          { id: uuid(), username, name: "Hello" }
         ])
         .returning(["id"])
         .execute(client);
@@ -46,7 +46,7 @@ app.post("/users/create/:username", async (req, res) => {
 app.get("/users/info/:userid", async (req, res) => {
   const id = req.params.userid;
   await pool.withClient(async client => {
-    const user = await createSelectBuilder()
+    const user = await createSimpleQueryBuilder()
         .from(User)
         .addWhere(where => where("id").Equals(id))
         .selectAll()
