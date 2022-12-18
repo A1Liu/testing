@@ -10,3 +10,4 @@ Things I have encountered:
 6. `Error: Cannot rerun migration` - need to be globally unique
 7. Tried to do auto-migrations with `executeMigrations` - can use `conn.synchronizeEntity` instead
 8. Was confused for a bit because some methods are on `pool` and others are on `conn`
+9. Generated columns?

@@ -137,11 +137,12 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@karimsa/tinyorm@0.0.1-11":
-  version "0.0.1-11"
-  resolved "https://registry.yarnpkg.com/@karimsa/tinyorm/-/tinyorm-0.0.1-11.tgz#4f74634da2853287f563510f7b10c15c1f8a42f8"
-  integrity sha512-3EbBGMXSWvqTJx55k76j9AeM6ALGsw+l3KF06LTTPDJUeeurIgNbmlEV22pIxoDO6R7/3WkYCniz/yEINthI5g==
+"@karimsa/tinyorm@0.0.1-14":
+  version "0.0.1-14"
+  resolved "https://registry.yarnpkg.com/@karimsa/tinyorm/-/tinyorm-0.0.1-14.tgz#3a3d9a08607529988446bff14cdaf12b857a6225"
+  integrity sha512-MhWMBbLq5Yr3Pa3QRsZGBSfease4KlUncwFo/q8QtyYSgVORtwTiABclduTnu/s4uWnDb+8HdNPo5oadp4S/FQ==
   dependencies:
+    lodash.pick "4.4.0"
     lodash.snakecase "4.1.1"
     pg-cursor "2.7.4"
     pino "8.7.0"
@@ -585,6 +586,11 @@ ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+
+lodash.pick@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==
 
 lodash.snakecase@4.1.1:
   version "4.1.1"

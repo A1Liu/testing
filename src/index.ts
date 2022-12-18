@@ -1,5 +1,5 @@
 import express from "express";
-import {Entity, Column, createSelectBuilder, } from "@karimsa/tinyorm";
+import {Entity, Column, createSelectBuilder, createInsertBuilder,} from "@karimsa/tinyorm";
 import { createConnectionPool } from '@karimsa/tinyorm';
 import {v4 as uuid} from "uuid"
 
@@ -26,18 +26,19 @@ app.post("/users/create/:username", async (req, res) => {
   const username = req.params.username;
   await pool.withClient(async client => {
 
-    const user = await createInsert()
-        .from(User)
-        .addWhere(where => where("id").Equals(id))
-        .selectAll()
-        .getOne(client);
+    const [user] = await createInsertBuilder<User>(User)
+        .addRows([
+          { username, name: "Hello" }
+        ])
+        .returning(["id"])
+        .execute(client);
     if (!user) {
       res.json({});
       return;
     }
 
     res.json({
-      id:
+      id: user.id
     });
   })
 });
