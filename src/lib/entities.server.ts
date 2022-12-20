@@ -1,23 +1,23 @@
-import {Entity, Column } from "@karimsa/tinyorm";
+import { Entity, Column } from '@karimsa/tinyorm';
 import { createConnectionPool } from '@karimsa/tinyorm';
-import {v4 as uuid} from "uuid"
+import { v4 as uuid } from 'uuid';
 
-// export const pool = createConnectionPool({
-//   user: 'postgres',
-//   password: 'password',
-//   port: 1313,
-// });
+export const pool = createConnectionPool({
+	user: 'postgres',
+	password: 'password',
+	port: 1313
+});
 
-// export class User extends Entity({ schema: "app", tableName: "users" }) {
-//   @Column({ type: "uuid" })
-//   readonly id: string;
-//
-//   @Column({ type: "text" })
-//   readonly username: string;
-//
-//   @Column({ type: "text" })
-//   readonly name: string;
-// }
+export class User extends Entity({ schema: 'app', tableName: 'users' }) {
+	@Column({ type: 'uuid' })
+	readonly id: string;
+
+	@Column({ type: 'text' })
+	readonly username: string;
+
+	@Column({ type: 'text' })
+	readonly name: string;
+}
 
 /*
 app.post("/users/create/:username", async (req, res) => {
