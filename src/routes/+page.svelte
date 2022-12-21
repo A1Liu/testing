@@ -2,9 +2,6 @@
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
   import { enhance } from '$app/forms';
-  import type { ActionData } from './$types';
-
-  export let form: ActionData;
 </script>
 
 <svelte:head>
@@ -23,10 +20,6 @@
 
     to your new<br />SvelteKit app
   </h1>
-
-  {#if form?.id}
-    <h4>{form?.id}</h4>
-  {/if}
 
   <form method="POST" action="?/createUser" use:enhance>
     <label>
