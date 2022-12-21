@@ -120,19 +120,17 @@ export const getPool = memoize(async () => {
       await conn.synchronizeEntity(entity);
     }
 
-    await createInsertBuilder()
-      .into(Company)
-      .withColumns(['id', 'kind', 'name', 'primary_contact_email', 'primary_contact_phone'])
-      .addRows([
-        {
-          id: INTERNAL_COMPANY_ID,
-          kind: CompanyKind.Internal,
-          name: '',
-          primary_contact_email: '',
-          primary_contact_phone: ''
-        }
-      ])
-      .execute(conn);
+    await conn.query(
+      sql.finalize(sql`
+          INSERT INTO app.company
+          (id, kind, name, primary_contact_email, primary_contact_phone)
+          VALUES (
+            ${INTERNAL_COMPANY_ID}::uuid, ${CompanyKind.Internal},
+            ${'PizzaCo'}, ${'albertymliu@gmail.com'}, ${'+1 1234567890'}
+          )
+          ON CONFLICT DO NOTHING
+      `)
+    );
   });
 
   return pool;
