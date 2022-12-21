@@ -29,8 +29,6 @@ export const actions: Actions = {
 // export const prerender = true;
 
 export const load: PageServerLoad = async ({ params, url }) => {
-  const pool = await getPool();
-
   return await withConnection(async (conn) => {
     const output = await createSimpleQueryBuilder().from(User).selectAll().getOne(conn);
     return { output };

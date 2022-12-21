@@ -27,3 +27,6 @@ Things I have encountered:
 11. Why is `createSimpleQueryBuilder().from(User)` not just
     `createSimpleQueryBuilder(User)` or alternatively `SimpleQUeryBuilder.from(User)`
 12. Foreign keys don't exist yet
+13. Can't do `addRows` for ALL rows without listing them in `withColumns` (suggestion: `omittingColumns`)
+14. Column renames don't seem to work
+15. Columns with a `uuid` type don't really work with insertion
