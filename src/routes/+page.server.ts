@@ -7,11 +7,11 @@ import { hello } from '../lib/server/entities';
 // export const prerender = true;
 
 export const load: PageServerLoad = async ({ params }) => {
-	// const output = await pool.withClient((client) => {
-	// 	return { a: 12 };
-	// });
+  // const output = await pool.withClient((client) => {
+  // 	return { a: 12 };
+  // });
 
-	const output = hello();
+  const output = hello();
 
-	return { output };
+  return { output };
 };
