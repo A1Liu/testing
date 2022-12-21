@@ -1,7 +1,6 @@
 <script lang="ts">
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
-  import { enhance } from '$app/forms';
 </script>
 
 <svelte:head>
@@ -20,18 +19,6 @@
 
     to your new<br />SvelteKit app
   </h1>
-
-  <form method="POST" action="?/createUser" use:enhance>
-    <label>
-      Username
-      <input name="username" type="text" />
-    </label>
-    <label>
-      Name
-      <input name="name" type="text" />
-    </label>
-    <button>Create user</button>
-  </form>
 </section>
 
 <style>
