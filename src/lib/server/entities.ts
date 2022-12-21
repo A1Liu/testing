@@ -1,5 +1,5 @@
-import { Entity, Column, sql, createSimpleQueryBuilder } from '@karimsa/tinyorm';
-import { createConnectionPool } from '@karimsa/tinyorm';
+import { createConnectionPool, Entity, Column, sql } from '@karimsa/tinyorm';
+import type { Connection } from '@karimsa/tinyorm';
 import { v4 as uuid } from 'uuid';
 import { memoize } from '../async';
 
@@ -13,46 +13,6 @@ export class User extends Entity({ schema: 'app', tableName: 'users' }) {
   @Column({ type: 'text' })
   readonly name: string;
 }
-
-/*
-app.post("/users/create/:username", async (req, res) => {
-  const username = req.params.username;
-  await pool.withClient(async client => {
-
-    const [user] = await createInsertBuilder<User>(User)
-        .addRows([
-          { id: uuid(), username, name: "Hello" }
-        ])
-        .returning(["id"])
-        .execute(client);
-    if (!user) {
-      res.json({});
-      return;
-    }
-
-    res.json({
-      id: user.id
-    });
-  })
-});
-
-app.get("/users/info/:userid", async (req, res) => {
-  const id = req.params.userid;
-  await pool.withClient(async client => {
-    const user = await createSimpleQueryBuilder()
-        .from(User)
-        .addWhere(where => where("id").Equals(id))
-        .selectAll()
-        .getOne(client);
-    if (!user) {
-      res.json({});
-      return;
-    }
-
-    res.json(user);
-  })
-});
- */
 
 export const getPool = memoize(async () => {
   const pool = createConnectionPool({
@@ -86,5 +46,10 @@ export const getPool = memoize(async () => {
 
   return pool;
 });
+
+export async function withConnection<T>(f: (conn: Connection) => Promise<T>): Promise<T> {
+  const pool = await getPool();
+  return pool.withTransaction(f);
+}
 
 getPool();
