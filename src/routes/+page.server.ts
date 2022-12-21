@@ -1,5 +1,5 @@
-import { pool, User } from '$lib/entities.server';
 import type { PageServerLoad } from './$types';
+import { hello } from '../lib/server/entities';
 // import { createSimpleQueryBuilder } from "@karimsa/tinyorm";
 
 // since there's no dynamic data here, we can prerender
@@ -7,9 +7,11 @@ import type { PageServerLoad } from './$types';
 // export const prerender = true;
 
 export const load: PageServerLoad = async ({ params }) => {
-	const output = await pool.withClient((client) => {
-		return { a: 12 };
-	});
+	// const output = await pool.withClient((client) => {
+	// 	return { a: 12 };
+	// });
 
-	return output;
+	const output = hello();
+
+	return { output };
 };
