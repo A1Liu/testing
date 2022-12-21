@@ -2,8 +2,9 @@
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
   import { enhance } from '$app/forms';
-  import type { ActionData } from './$types';
+  import type { PageData, ActionData } from './$types';
 
+  export let data: PageData;
   export let form: ActionData;
 </script>
 
@@ -23,6 +24,8 @@
 
     to your new<br />SvelteKit app
   </h1>
+
+  <code>{JSON.stringify(data)}</code>
 
   {#if form?.id}
     <h4>{form?.id}</h4>
