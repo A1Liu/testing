@@ -10,7 +10,8 @@ Things I have encountered:
 6. `Error: Cannot rerun migration` - need to be globally unique
 7. Tried to do auto-migrations with `executeMigrations` - can use `conn.synchronizeEntity` instead
 8. Was confused for a bit because some methods are on `pool` and others are on `conn`
-9. Generated columns?
+9. Generated columns? set a default value in the migration, then don't ask for the column on insert
+10. Why is `createSimpleQueryBuilder().from(User)` not just `createSimpleQueryBuilder(User)`
 
 # create-svelte
 

@@ -189,10 +189,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@karimsa/tinyorm@0.0.1-14":
-  version "0.0.1-14"
-  resolved "https://registry.yarnpkg.com/@karimsa/tinyorm/-/tinyorm-0.0.1-14.tgz#3a3d9a08607529988446bff14cdaf12b857a6225"
-  integrity sha512-MhWMBbLq5Yr3Pa3QRsZGBSfease4KlUncwFo/q8QtyYSgVORtwTiABclduTnu/s4uWnDb+8HdNPo5oadp4S/FQ==
+"@karimsa/tinyorm@0.0.1-15":
+  version "0.0.1-15"
+  resolved "https://registry.yarnpkg.com/@karimsa/tinyorm/-/tinyorm-0.0.1-15.tgz#973810732116c1713f2cff27701f4148131caa38"
+  integrity sha512-0F1pgQq3cMOqj7KrL0e+jry5UCybNAGVaVvWYEVvYmmIXbFQqdhqrw858vOsM/JeCud6vJ4jxSwbzyW6Tm0D9A==
   dependencies:
     lodash.pick "4.4.0"
     lodash.snakecase "4.1.1"

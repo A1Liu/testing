@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit';
 import { Game } from './game';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load = (({ cookies }) => {
+export const load: PageServerLoad = ({ cookies }) => {
   const game = new Game(cookies.get('sverdle'));
 
   return {
@@ -22,9 +22,9 @@ export const load = (({ cookies }) => {
      */
     answer: game.answers.length >= 6 ? game.answer : null
   };
-}) satisfies PageServerLoad;
+};
 
-export const actions = {
+export const actions: Actions = {
   /**
    * Modify game state in reaction to a keypress. If client-side JavaScript
    * is available, this will happen in the browser instead of here
@@ -66,4 +66,4 @@ export const actions = {
   restart: async ({ cookies }) => {
     cookies.delete('sverdle');
   }
-} satisfies Actions;
+};

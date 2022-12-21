@@ -1,15 +1,44 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 import { getPool, User } from '../lib/server/entities';
-import { createSimpleQueryBuilder } from '@karimsa/tinyorm';
+import { createInsertBuilder, createSimpleQueryBuilder } from '@karimsa/tinyorm';
+import { parseFormData } from '../lib/server/parsing';
+import { z } from 'zod';
+
+export const actions: Actions = {
+  default: async (event) => {
+    // TODO log the user in
+  },
+  createUser: async ({ cookies, request }) => {
+    const { username, name } = await parseFormData(
+      request,
+      z.object({
+        username: z.string(),
+        name: z.string()
+      })
+    );
+
+    const pool = await getPool();
+    const result = await pool.withTransaction(async (conn) => {
+      return createInsertBuilder()
+        .into(User)
+        .withColumns(['username', 'name'])
+        .addRows([{ username, name }])
+        .returning(['id'])
+        .execute(conn);
+    });
+
+    return result[0];
+  }
+};
 
 // since there's no dynamic data here, we can prerender
 // it so that it gets served as a static asset in production
 // export const prerender = true;
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, url }) => {
   const pool = await getPool();
-  const output = await pool.withClient(async (client) => {
-    return await createSimpleQueryBuilder().from(User).selectAll().getOne(client);
+  const output = await pool.withTransaction(async (conn) => {
+    return await createSimpleQueryBuilder().from(User).selectAll().getOne(conn);
   });
 
   return { output };

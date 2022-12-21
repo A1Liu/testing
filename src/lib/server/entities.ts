@@ -1,7 +1,7 @@
 import { Entity, Column } from '@karimsa/tinyorm';
 import { createConnectionPool } from '@karimsa/tinyorm';
 import { v4 as uuid } from 'uuid';
-import { memoize } from "../async";
+import { memoize } from '../async';
 
 export class User extends Entity({ schema: 'app', tableName: 'users' }) {
   @Column({ type: 'uuid' })
