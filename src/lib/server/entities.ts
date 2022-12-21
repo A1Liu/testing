@@ -4,8 +4,8 @@ import { v4 as uuid } from 'uuid';
 import { memoize } from '../async';
 
 export enum CompanyKind {
-  Internal = "Internal",
-  Client = "Client"
+  Internal = 'Internal',
+  Client = 'Client'
 }
 
 /**

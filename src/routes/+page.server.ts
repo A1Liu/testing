@@ -11,7 +11,7 @@ export const actions: Actions = {
       name: z.string()
     });
 
-    return await withConnection(async conn => {
+    return await withConnection(async (conn) => {
       const result = await createInsertBuilder()
         .into(User)
         .withColumns(['username', 'name'])
@@ -31,7 +31,7 @@ export const actions: Actions = {
 export const load: PageServerLoad = async ({ params, url }) => {
   const pool = await getPool();
 
-  return await withConnection(async conn => {
+  return await withConnection(async (conn) => {
     const output = await createSimpleQueryBuilder().from(User).selectAll().getOne(conn);
     return { output };
   });
