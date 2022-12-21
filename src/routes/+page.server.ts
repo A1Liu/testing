@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types';
-import { getPool, User } from '../lib/server/entities';
+import { getPool, User, withConnection } from '$lib/server/entities';
 import { createInsertBuilder, createSimpleQueryBuilder } from '@karimsa/tinyorm';
-import { parseFormData } from '../lib/server/parsing';
+import { parseFormData } from '$lib/server/parsing';
 import { z } from 'zod';
 
 export const actions: Actions = {
@@ -11,17 +11,16 @@ export const actions: Actions = {
       name: z.string()
     });
 
-    const pool = await getPool();
-    const result = await pool.withTransaction(async (conn) => {
-      return createInsertBuilder()
+    return await withConnection(async conn => {
+      const result = await createInsertBuilder()
         .into(User)
         .withColumns(['username', 'name'])
         .addRows([{ username, name }])
         .returning(['id'])
         .execute(conn);
-    });
 
-    return result[0];
+      return result[0];
+    });
   }
 };
 
@@ -31,9 +30,9 @@ export const actions: Actions = {
 
 export const load: PageServerLoad = async ({ params, url }) => {
   const pool = await getPool();
-  const output = await pool.withTransaction(async (conn) => {
-    return await createSimpleQueryBuilder().from(User).selectAll().getOne(conn);
-  });
 
-  return { output };
+  return await withConnection(async conn => {
+    const output = await createSimpleQueryBuilder().from(User).selectAll().getOne(conn);
+    return { output };
+  });
 };

@@ -3,9 +3,29 @@ import type { Connection } from '@karimsa/tinyorm';
 import { v4 as uuid } from 'uuid';
 import { memoize } from '../async';
 
-export class ClientOrganization extends Entity({ schema: 'app', tableName: 'client_organization' }) {
+export enum CompanyKind {
+  Internal = "Internal",
+  Client = "Client"
+}
+
+/**
+ * Company that interacts in the system. Could be us, or could be a client.
+ */
+export class Company extends Entity({ schema: 'app', tableName: 'client_organization' }) {
   @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
   readonly id: string;
+
+  @Column({ type: 'text' })
+  readonly kind: CompanyKind;
+
+  @Column({ type: 'text' })
+  readonly name: string;
+
+  @Column({ type: 'text' })
+  readonly primaryContactEmail: string;
+
+  @Column({ type: 'text' })
+  readonly primaryContactPhone: string;
 }
 
 export class Train extends Entity({ schema: 'app', tableName: 'train' }) {
