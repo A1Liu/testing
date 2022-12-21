@@ -80,7 +80,7 @@ export class TrainYard extends Entity({ schema: 'app', tableName: 'train_yard' }
   readonly id: string;
 }
 
-export class User extends Entity({ schema: 'app', tableName: 'users' }) {
+export class User extends Entity({ schema: 'app', tableName: 'user' }) {
   @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
   readonly id: string;
 
