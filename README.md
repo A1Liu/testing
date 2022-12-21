@@ -10,12 +10,17 @@ Things I have encountered:
 6. `Error: Cannot rerun migration` - need to be globally unique
 7. Tried to do auto-migrations with `executeMigrations` - can use `conn.synchronizeEntity` instead
 8. Was confused for a bit because some methods are on `pool` and others are on `conn`
+9. Was confused for a bit because `@Column({ defaultValue: n })` requires a `PreparedQuery`
 9. Generated columns? set a default value in the migration, then don't ask for the column on insert
    - Online Docs are incomplete here
    - How do i generate UUIDv4 stuffs with current API
    - It seems the TSDocs actually have an example for exactly
      what I'm trying to do, but that example isn't on the online docs
+   - OK actually the docs exist but the `params` section is kinda blank
+     and I missed the link to `ColumnOptions` in the description, so I
+     assumed the page was actually essentially blank and ignored it.
 10. Why is `createSimpleQueryBuilder().from(User)` not just `createSimpleQueryBuilder(User)`
+    or alternatively `SimpleQUeryBuilder.from(User)`
 
 # create-svelte
 

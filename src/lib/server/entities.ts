@@ -3,6 +3,19 @@ import type { Connection } from '@karimsa/tinyorm';
 import { v4 as uuid } from 'uuid';
 import { memoize } from '../async';
 
+export class ClientOrganization extends Entity({ schema: 'app', tableName: 'client_organization' }) {
+  @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
+  readonly id: string;
+}
+
+export class Train extends Entity({ schema: 'app', tableName: 'train' }) {
+  @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
+  readonly id: string;
+
+  @Column({ type: 'uuid' })
+  readonly owner: string;
+}
+
 export class User extends Entity({ schema: 'app', tableName: 'users' }) {
   @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
   readonly id: string;
@@ -36,7 +49,7 @@ export const getPool = memoize(async () => {
   await pool.withTransaction(async (conn) => {
     const entities = [User];
 
-    // await conn.query(sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
+    await conn.query(sql.finalize(sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`));
 
     await conn.initMigrations();
     for (const entity of entities) {

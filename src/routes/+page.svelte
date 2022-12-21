@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Counter from './Counter.svelte';
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
   import { enhance } from '$app/forms';
@@ -26,11 +25,7 @@
     to your new<br />SvelteKit app
   </h1>
 
-  <h2>
-    try editing <strong>src/routes/+page.svelte</strong>
-  </h2>
-
-  <code> {JSON.stringify(data)}</code>
+  <code>{JSON.stringify(data)}</code>
 
   {#if form?.id}
     <h4>{form?.id}</h4>
@@ -47,8 +42,6 @@
     </label>
     <button>Create user</button>
   </form>
-
-  <Counter />
 </section>
 
 <style>
