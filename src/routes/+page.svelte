@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
   import Counter from './Counter.svelte';
   import welcome from '$lib/images/svelte-welcome.webp';
   import welcome_fallback from '$lib/images/svelte-welcome.png';
+  import { enhance } from '$app/forms';
+  import type { PageData, ActionData } from './$types';
 
-  export let data;
+  export let data: PageData;
+  export let form: ActionData;
 </script>
 
 <svelte:head>
@@ -28,6 +31,22 @@
   </h2>
 
   <code> {JSON.stringify(data)}</code>
+
+  {#if form?.id}
+    <h4>{form?.id}</h4>
+  {/if}
+
+  <form method="POST" action="?/createUser" use:enhance>
+    <label>
+      Username
+      <input name="username" type="text" />
+    </label>
+    <label>
+      Name
+      <input name="name" type="text" />
+    </label>
+    <button>Create user</button>
+  </form>
 
   <Counter />
 </section>

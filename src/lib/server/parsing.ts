@@ -1,9 +1,6 @@
-import type { z } from 'zod';
+import { z } from 'zod';
 
-export async function parseFormData<T extends object>(
-  request: Request,
-  schema: z.Schema<T>
-): Promise<T> {
+export async function parseFormData<T extends z.ZodRawShape>(request: Request, schema: T) {
   const data = await request.formData();
 
   const record: Record<string, unknown> = {};
@@ -11,5 +8,5 @@ export async function parseFormData<T extends object>(
     record[key] = data.get(key);
   }
 
-  return schema.parse(record);
+  return z.object(schema).parse(record);
 }

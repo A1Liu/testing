@@ -5,17 +5,11 @@ import { parseFormData } from '../lib/server/parsing';
 import { z } from 'zod';
 
 export const actions: Actions = {
-  default: async (event) => {
-    // TODO log the user in
-  },
   createUser: async ({ cookies, request }) => {
-    const { username, name } = await parseFormData(
-      request,
-      z.object({
-        username: z.string(),
-        name: z.string()
-      })
-    );
+    const { username, name } = await parseFormData(request, {
+      username: z.string(),
+      name: z.string()
+    });
 
     const pool = await getPool();
     const result = await pool.withTransaction(async (conn) => {

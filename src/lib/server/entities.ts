@@ -1,10 +1,10 @@
-import { Entity, Column } from '@karimsa/tinyorm';
+import { Entity, Column, sql, createSimpleQueryBuilder } from '@karimsa/tinyorm';
 import { createConnectionPool } from '@karimsa/tinyorm';
 import { v4 as uuid } from 'uuid';
 import { memoize } from '../async';
 
 export class User extends Entity({ schema: 'app', tableName: 'users' }) {
-  @Column({ type: 'uuid' })
+  @Column({ type: 'uuid', defaultValue: sql`uuid_generate_v4()` })
   readonly id: string;
 
   @Column({ type: 'text' })
@@ -75,6 +75,8 @@ export const getPool = memoize(async () => {
 
   await pool.withTransaction(async (conn) => {
     const entities = [User];
+
+    // await conn.query(sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
 
     await conn.initMigrations();
     for (const entity of entities) {

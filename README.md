@@ -11,6 +11,10 @@ Things I have encountered:
 7. Tried to do auto-migrations with `executeMigrations` - can use `conn.synchronizeEntity` instead
 8. Was confused for a bit because some methods are on `pool` and others are on `conn`
 9. Generated columns? set a default value in the migration, then don't ask for the column on insert
+   - Online Docs are incomplete here
+   - How do i generate UUIDv4 stuffs with current API
+   - It seems the TSDocs actually have an example for exactly
+     what I'm trying to do, but that example isn't on the online docs
 10. Why is `createSimpleQueryBuilder().from(User)` not just `createSimpleQueryBuilder(User)`
 
 # create-svelte
