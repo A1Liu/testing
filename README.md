@@ -14,7 +14,7 @@ Things I have encountered:
 8. ~~Was confused for a bit because some methods are on `pool` and others are on `conn`~~
 9. Was confused for a bit because `@Column({ defaultValue: n })` requires a `PreparedQuery`
 10. ~~Generated columns? set a default value in the migration, then don't ask
-    for the column on insert
+    for the column on insert~~
 
     - ~~Online Docs are incomplete here~~
     - ~~How do i generate UUIDv4 stuffs with current API~~
